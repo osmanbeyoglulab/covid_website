@@ -18,7 +18,8 @@ import hydralit_components as hc
 st.set_page_config(
         page_title='COVID-19db of Immune Cell States',
         page_icon="./assets/logos/spartan.png",
-        # initial_sidebar_state="expanded",
+        initial_sidebar_state="expanded",
+        layout= 'wide'
 )
 
 # def define_layout(max_width, padding_top='0rem', padding_right='0rem', padding_left='0rem', padding_bottom='0rem'):
@@ -43,7 +44,8 @@ st.set_page_config(
 
 # define_layout(max_width='80%', padding_top='2rem', padding_right='0rem', padding_left='0rem', padding_bottom='0rem')
 
-max_width_str = f"max-width: {75}%;"
+
+max_width_str = f"max-width: {100}%;"
 st.markdown(f"""
         <style>
         .appview-container .main .block-container{{{max_width_str}}}
