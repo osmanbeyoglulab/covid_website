@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "HOXB1", "label": "HOXB1", "shape": "dot"}, {"color": "red", "id": "HOXA1", "label": "HOXA1", "shape": "dot"}, {"color": "#97c2fc", "id": "LNPK", "label": "LNPK", "shape": "dot"}, {"color": "#97c2fc", "id": "GTF3C3", "label": "GTF3C3", "shape": "dot"}, {"color": "#97c2fc", "id": "MTX2", "label": "MTX2", "shape": "dot"}, {"color": "#97c2fc", "id": "CHN1", "label": "CHN1", "shape": "dot"}, {"color": "#97c2fc", "id": "HOXD10", "label": "HOXD10", "shape": "dot"}, {"color": "#97c2fc", "id": "HOXD11", "label": "HOXD11", "shape": "dot"}, {"color": "#97c2fc", "id": "KCNH3", "label": "KCNH3", "shape": "dot"}, {"color": "#97c2fc", "id": "CC2D1A", "label": "CC2D1A", "shape": "dot"}, {"color": "#97c2fc", "id": "PBX1", "label": "PBX1", "shape": "dot"}, {"color": "#97c2fc", "id": "PKNOX1", "label": "PKNOX1", "shape": "dot"}, {"color": "#97c2fc", "id": "HOXD1", "label": "HOXD1", "shape": "dot"}, {"color": "#97c2fc", "id": "KDM6A", "label": "KDM6A", "shape": "dot"}, {"color": "#97c2fc", "id": "EGR2", "label": "EGR2", "shape": "dot"}, {"color": "#97c2fc", "id": "PKNOX2", "label": "PKNOX2", "shape": "dot"}, {"color": "#97c2fc", "id": "HOXB2", "label": "HOXB2", "shape": "dot"}, {"color": "#97c2fc", "id": "KDM6B", "label": "KDM6B", "shape": "dot"}, {"color": "#97c2fc", "id": "MEIS1", "label": "MEIS1", "shape": "dot"}, {"color": "#97c2fc", "id": "NCK2", "label": "NCK2", "shape": "dot"}, {"color": "#97c2fc", "id": "ROBO3", "label": "ROBO3", "shape": "dot"}, {"color": "#97c2fc", "id": "SALL4", "label": "SALL4", "shape": "dot"}, {"color": "#97c2fc", "id": "CDC42", "label": "CDC42", "shape": "dot"}, {"color": "#97c2fc", "id": "EPHA4", "label": "EPHA4", "shape": "dot"}, {"color": "#97c2fc", "id": "RASA1", "label": "RASA1", "shape": "dot"}, {"color": "#97c2fc", "id": "RAC1", "label": "RAC1", "shape": "dot"}, {"color": "#97c2fc", "id": "DGKG", "label": "DGKG", "shape": "dot"}, {"color": "#97c2fc", "id": "CRABP1", "label": "CRABP1", "shape": "dot"}, {"color": "#97c2fc", "id": "RARA", "label": "RARA", "shape": "dot"}, {"color": "#97c2fc", "id": "KRTAP5-9", "label": "KRTAP5-9", "shape": "dot"}]);
+                  edges = new vis.DataSet([{"from": "HOXD1", "to": "HOXB1", "value": 0.0938}, {"from": "HOXD1", "to": "HOXA1", "value": 0.09090000000000001}, {"from": "HOXD1", "to": "LNPK", "value": 0.08299999999999999}, {"from": "HOXD1", "to": "GTF3C3", "value": 0.0669}, {"from": "HOXD1", "to": "MTX2", "value": 0.0659}, {"from": "HOXD1", "to": "CHN1", "value": 0.0648}, {"from": "HOXD1", "to": "HOXD10", "value": 0.0628}, {"from": "HOXD1", "to": "HOXD11", "value": 0.062}, {"from": "HOXD1", "to": "KCNH3", "value": 0.0607}, {"from": "HOXD1", "to": "CC2D1A", "value": 0.0601}, {"from": "HOXB1", "to": "PBX1", "value": 0.0999}, {"from": "HOXB1", "to": "PKNOX1", "value": 0.0955}, {"from": "HOXB1", "to": "HOXA1", "value": 0.09340000000000001}, {"from": "HOXB1", "to": "KDM6A", "value": 0.0813}, {"from": "HOXB1", "to": "EGR2", "value": 0.0789}, {"from": "HOXB1", "to": "PKNOX2", "value": 0.0776}, {"from": "HOXB1", "to": "HOXB2", "value": 0.075}, {"from": "HOXB1", "to": "KDM6B", "value": 0.0741}, {"from": "HOXB1", "to": "MEIS1", "value": 0.073}, {"from": "CHN1", "to": "HOXA1", "value": 0.0847}, {"from": "CHN1", "to": "NCK2", "value": 0.0837}, {"from": "CHN1", "to": "ROBO3", "value": 0.08249999999999999}, {"from": "CHN1", "to": "SALL4", "value": 0.08249999999999999}, {"from": "CHN1", "to": "CDC42", "value": 0.0813}, {"from": "CHN1", "to": "EPHA4", "value": 0.0767}, {"from": "CHN1", "to": "RASA1", "value": 0.0751}, {"from": "CHN1", "to": "RAC1", "value": 0.06939999999999999}, {"from": "CHN1", "to": "HOXB1", "value": 0.0671}, {"from": "CHN1", "to": "DGKG", "value": 0.067}, {"from": "HOXA1", "to": "PBX1", "value": 0.0833}, {"from": "HOXA1", "to": "SALL4", "value": 0.0727}, {"from": "HOXA1", "to": "ROBO3", "value": 0.0722}, {"from": "HOXA1", "to": "PKNOX1", "value": 0.07089999999999999}, {"from": "HOXA1", "to": "CRABP1", "value": 0.0675}, {"from": "HOXA1", "to": "RARA", "value": 0.0643}, {"from": "HOXA1", "to": "KRTAP5-9", "value": 0.0613}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
