@@ -21,46 +21,46 @@ st.set_page_config(
         initial_sidebar_state="expanded",
 )
 
-def define_layout(max_width, padding_top='0rem', padding_right='0rem', padding_left='0rem', padding_bottom='0rem'):
+# def define_layout(max_width, padding_top='0rem', padding_right='0rem', padding_left='0rem', padding_bottom='0rem'):
 
 
-    st.markdown(
-        f"""
-        <style>
-            .appview-container .main .block-container{{
-                max-width: {max_width};
-                padding-top: {padding_top};
-                padding-right: {padding_right};
-                padding-left: {padding_left};
-                padding-bottom: {padding_bottom};
-            }}
-          
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-define_layout(max_width='80%', padding_top='2rem', padding_right='0rem', padding_left='0rem', padding_bottom='0rem')
-
-# max_width_str = f"max-width: {75}%;"
-# st.markdown(f"""
+#     st.markdown(
+#         f"""
 #         <style>
-#         .appview-container .main .block-container{{{max_width_str}}}
+#             .appview-container .main .block-container{{
+#                 max-width: {max_width};
+#                 padding-top: {padding_top};
+#                 padding-right: {padding_right};
+#                 padding-left: {padding_left};
+#                 padding-bottom: {padding_bottom};
+#             }}
+          
 #         </style>
 #         """,
 #         unsafe_allow_html=True,
 #     )
 
-# st.markdown("""
-#         <style>
-#                .block-container {
-#                     padding-top: 0rem;
-#                     padding-bottom: 0rem;
+
+# define_layout(max_width='80%', padding_top='2rem', padding_right='0rem', padding_left='0rem', padding_bottom='0rem')
+
+max_width_str = f"max-width: {75}%;"
+st.markdown(f"""
+        <style>
+        .appview-container .main .block-container{{{max_width_str}}}
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+st.markdown("""
+        <style>
+               .block-container {
+                    padding-top: 0rem;
+                    padding-bottom: 0rem;
                     
-#                 }
-#         </style>
-#         """, unsafe_allow_html=True)
+                }
+        </style>
+        """, unsafe_allow_html=True)
 
 
 Image.MAX_IMAGE_PIXELS = None
