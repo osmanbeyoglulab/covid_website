@@ -1,3 +1,4 @@
+streamlit==1.29.0
 extra_streamlit_components==0.1.56
 pyvis==0.3.1
 seaborn
